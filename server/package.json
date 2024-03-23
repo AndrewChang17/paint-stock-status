@@ -1,0 +1,13 @@
+{
+  "name": "paint-stock-status-express",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.19.1"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}
