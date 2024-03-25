@@ -36,7 +36,7 @@ const statuses = ref([
           v-model="statuses"
           item-key="status"
           :group="{ name: 'statuses', pull: 'clone', put: false }"
-          class="flex flex-col h-full fixed left-8 md:left-16 gap-4"
+          class="flex flex-col h-full top-1/3 fixed left-8 md:left-16 gap-4"
       >
         <template #item="{ element }">
           <Status :status="element.status" />

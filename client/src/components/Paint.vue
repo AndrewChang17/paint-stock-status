@@ -11,6 +11,17 @@ const props = defineProps({
 
 const paintData = reactive(props.paint)
 
+// background color
+const bgColor = computed(() => {
+  return {
+    blue: "bg-blue-200",
+    grey: "bg-gray-200",
+    black: "bg-neutral-600 text-white",
+    white: "bg-neutral-50",
+    purple: "bg-purple-200"
+  }[props.color]
+})
+
 // status list for this paint
 const paintStatuses = computed({
   // getter
@@ -33,33 +44,33 @@ const paintStatuses = computed({
   }
 })
 
-// update paint with changes
-watch(paintData, async (data) => {
+// watch paint status changes
+watch(() => paintData.available, async () => {
+  await updatePaint()
+})
+watch(() => paintData.low, async () => {
+  await updatePaint()
+})
+watch(() => paintData.out_of_stock, async () => {
+  await updatePaint()
+})
+
+// Updates paint in the database with a PATCH request
+const updatePaint = async () => {
   try {
-    const url = import.meta.env.VITE_API_URL + "paints" + "/" + data.id
+    const url = import.meta.env.VITE_API_URL + "paints" + "/" + paintData.id
     const resp = await fetch(url, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ ...data })
+      body: JSON.stringify({...paintData })
     })
     console.log(resp)
   } catch (error) {
     console.error(error)
   }
-})
-
-// background color
-const bgColor = computed(() => {
-  return {
-    blue: "bg-blue-200",
-    grey: "bg-gray-200",
-    black: "bg-neutral-600 text-white",
-    white: "bg-neutral-50",
-    purple: "bg-purple-200"
-  }[props.color]
-})
+}
 
 // remove status from paint
 const removeStatus = (status) => {
