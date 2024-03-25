@@ -30,21 +30,21 @@ const statuses = ref([
 </script>
 
 <template>
-  <main class="grid grid-cols-[1fr_1fr] md:grid-cols-[1fr_4fr] md:p-4">
-    <aside class="flex flex-col h-dvh w-1/2 md:w-1/6 p-4">
+  <main class="grid grid-cols-1 bg-neutral-100 p-4 md:grid-cols-[1fr_4fr] md:px-12">
+    <aside class="sticky top-0 h-40 w-full bg-white bg-opacity-50 p-4 md:h-dvh md:static md:bg-opacity-0">
       <draggable
           v-model="statuses"
           item-key="status"
           :group="{ name: 'statuses', pull: 'clone', put: false }"
-          class="flex flex-col h-full top-1/3 fixed left-8 md:left-16 gap-4"
+          class="flex h-full flex-row flex-wrap items-center justify-start gap-4 md:fixed md:top-1/3 md:left-16 md:flex-col"
       >
         <template #item="{ element }">
           <Status :status="element.status" />
         </template>
       </draggable>
     </aside>
-    <div class="container flex items-center">
-      <div class="grid grid-cols-1 md:grid-cols-5 w-full">
+    <div class="container flex w-full items-center">
+      <div class="grid w-full grid-cols-1 md:grid-cols-5">
         <Paint
           v-for="paint in paints"
           :paint="paint"

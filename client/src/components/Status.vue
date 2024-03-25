@@ -28,7 +28,7 @@ const text = computed(() => {
 
 <template>
   <div
-    class="flex w-40 max-w-sm flex-row items-center justify-between rounded-lg p-4 shadow hover:cursor-grab"
+    class="flex w-40 max-w-sm flex-row items-center justify-between rounded-lg p-4 shadow-md hover:cursor-grab"
     :class="color"
   >
     <span class="capitalize text-black">{{ text }}</span>

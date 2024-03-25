@@ -14,11 +14,11 @@ const paintData = reactive(props.paint)
 // background color
 const bgColor = computed(() => {
   return {
-    blue: "bg-blue-200",
-    grey: "bg-gray-200",
+    blue: "bg-blue-300",
+    grey: "bg-gray-300",
     black: "bg-neutral-600 text-white",
     white: "bg-neutral-50",
-    purple: "bg-purple-200"
+    purple: "bg-purple-300"
   }[props.color]
 })
 
@@ -84,7 +84,7 @@ const removeStatus = (status) => {
       <h3 class="text-5xl font-medium capitalize">{{ color }}</h3>
     </section>
     <draggable
-      class="flex h-96 flex-col items-center gap-4 p-4 md:h-80"
+      class="flex h-60 flex-col items-center gap-4 p-4 md:h-96"
       tag="section"
       v-model="paintStatuses"
       item-key="status"
