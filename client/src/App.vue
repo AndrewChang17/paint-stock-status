@@ -21,7 +21,7 @@ const fetchPaints = async () => {
   }
 }
 
-// status list
+// draggable status list
 const statuses = ref([
   {status: 'available'},
   {status: 'low'},
@@ -52,6 +52,7 @@ const statuses = ref([
           group="statuses"
           :key="paint.id"
           :color="paint.color"
+          @fetch-paints="fetchPaints"
         />
       </div>
     </div>

@@ -8,8 +8,16 @@ const props = defineProps({
   paint: Object,
   group: String
 })
+const emit = defineEmits(["fetchPaints"])
 
 const paintData = reactive(props.paint)
+
+// watch for changes in paint
+watch(props.paint, (newPaint) => {
+  paintData.available = newPaint.available
+  paintData.low = newPaint.low
+  paintData.out_of_stock = newPaint.out_of_stock
+})
 
 // background color
 const bgColor = computed(() => {
@@ -45,15 +53,24 @@ const paintStatuses = computed({
 })
 
 // watch paint status changes
-watch(() => paintData.available, async () => {
-  await updatePaint()
-})
-watch(() => paintData.low, async () => {
-  await updatePaint()
-})
-watch(() => paintData.out_of_stock, async () => {
-  await updatePaint()
-})
+watch(
+  () => paintData.available,
+  async () => {
+    await updatePaint()
+  }
+)
+watch(
+  () => paintData.low,
+  async () => {
+    await updatePaint()
+  }
+)
+watch(
+  () => paintData.out_of_stock,
+  async () => {
+    await updatePaint()
+  }
+)
 
 // Updates paint in the database with a PATCH request
 const updatePaint = async () => {
@@ -64,9 +81,11 @@ const updatePaint = async () => {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({...paintData })
+      body: JSON.stringify({ ...paintData })
     })
     console.log(resp)
+    // call API to fetch newest paints data
+    emit("fetchPaints")
   } catch (error) {
     console.error(error)
   }
