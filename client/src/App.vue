@@ -31,12 +31,13 @@ const statuses = ref([
 
 <template>
   <main class="grid grid-cols-1 bg-neutral-100 p-4 md:grid-cols-[1fr_4fr] md:px-12">
-    <aside class="sticky top-0 h-40 w-full bg-white bg-opacity-50 p-4 md:h-dvh md:static md:bg-opacity-0">
+    <aside class="sticky top-0 h-40 w-full border-r bg-white bg-opacity-50 p-4 md:h-dvh md:flex md:flex-col md:justify-center md:gap-12 md:bg-opacity-0">
+      <h2 class="hidden w-full text-center text-3xl font-medium md:block">Drag and Drop</h2>
       <draggable
           v-model="statuses"
           item-key="status"
           :group="{ name: 'statuses', pull: 'clone', put: false }"
-          class="flex h-full flex-row flex-wrap items-center justify-start gap-4 md:fixed md:top-1/3 md:left-16 md:flex-col"
+          class="sticky flex h-max flex-row flex-wrap items-center justify-start gap-4 md:top-0 md:flex-col md:justify-center"
       >
         <template #item="{ element }">
           <Status :status="element.status" />
