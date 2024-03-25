@@ -13,7 +13,7 @@ const emit = defineEmits(["fetchPaints"])
 const paintData = reactive(props.paint)
 
 // watch for changes in paint
-watch(props.paint, (newPaint) => {
+watch(() => props.paint, (newPaint) => {
   paintData.available = newPaint.available
   paintData.low = newPaint.low
   paintData.out_of_stock = newPaint.out_of_stock
